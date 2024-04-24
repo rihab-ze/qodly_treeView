@@ -5,7 +5,7 @@ The React tree component offers a versatile and customizable solution for displa
 
 ## Date and Month Picker component 
 
-![tree](/treeComponent)
+![tree](public/treeComponent.png)
 
 
 | Name       | Type       | Required | Description                                       |
