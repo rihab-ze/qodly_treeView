@@ -8,7 +8,7 @@ The React tree component offers a versatile and customizable solution for displa
 
 | Name | Type  | Required | Description                                   |
 | ---- | ----- | -------- | --------------------------------------------- |
-| Key  | Array | Yes      | The dataSource that contains data to display. |
+| dataSource  | Array | Yes      | The dataSource that contains data to display. |
 
 ### Datasource
 
@@ -17,6 +17,7 @@ The React tree component offers a versatile and customizable solution for displa
 | Key      | key       | String | Yes      | Unique identifier for the node.                        |
 | Label    | label     | String | Yes      | The label or display name for the node.                |
 | Icon     | icon      | String | No       | Icon representing the node (e.g., Font Awesome class). |
+| url      | url       | String | No       | url link if it is a last element                       |
 | Children | children  | Array  | No       | An array of child nodes belonging to the current node. |
 
 Example of data that can be used :
@@ -56,6 +57,7 @@ Example of data that can be used :
     "key": "2",
     "label": "Folder 2",
     "icon": "fa-solid fa-folder"
+    "url": "www.google.com"
   }
 ]
 ```
