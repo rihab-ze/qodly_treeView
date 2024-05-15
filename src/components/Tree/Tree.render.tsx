@@ -42,6 +42,7 @@ interface TreeNodeData {
   key: string;
   label: string;
   icon?: string;
+  url?: string;
   children?: TreeNodeData[];
 }
 
@@ -71,7 +72,7 @@ interface TreeNodeProps {
   onLastItemClick?: (node: TreeNodeData) => void;
 }
 function TreeNode({ node, isLast, onLastItemClick }: TreeNodeProps) {
-  const { children, label, icon } = node;
+  const { children, label, icon, url } = node;
 
   const [showChildren, setShowChildren] = useState(false);
 
@@ -97,8 +98,7 @@ function TreeNode({ node, isLast, onLastItemClick }: TreeNodeProps) {
             ''
           )}
           {icon && <i className={` ${icon} mr-1`}></i>}
-
-          <span>{label}</span>
+          {isLast ? <a href={url}>{label}</a> : <span>{label}</span>}
         </div>
       </div>
       <ul style={{ paddingLeft: '10px', marginLeft: '27px' }}>
