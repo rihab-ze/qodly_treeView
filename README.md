@@ -1,25 +1,23 @@
 # Overview
 
-The React tree component offers a versatile and customizable solution for displaying hierarchical data in web applications. 
+The React tree component offers a versatile and customizable solution for displaying hierarchical data in web applications.
 
-
-## Date and Month Picker component 
+## tree component
 
 ![tree](public/treeComponent.png)
 
-
-| Name       | Type       | Required | Description                                       |
-| ---------- | ---------- | -------- | ------------------------------------------------- |
-| Key        | Array     | Yes      | The dataSource that contains data to display.                  |
+| Name | Type  | Required | Description                                   |
+| ---- | ----- | -------- | --------------------------------------------- |
+| Key  | Array | Yes      | The dataSource that contains data to display. |
 
 ### Datasource
 
-| Name       | Attribute | Type       | Required | Description                                       |
-| ---------- | --------- | ---------- | -------- | ------------------------------------------------- |
-| Key        | key       | String     | Yes      | Unique identifier for the node.                   |
-| Label      | label     | String     | Yes      | The label or display name for the node.           |
-| Icon       | icon      | String     | No       | Icon representing the node (e.g., Font Awesome class). |
-| Children   | children  | Array      | No       | An array of child nodes belonging to the current node. |
+| Name     | Attribute | Type   | Required | Description                                            |
+| -------- | --------- | ------ | -------- | ------------------------------------------------------ |
+| Key      | key       | String | Yes      | Unique identifier for the node.                        |
+| Label    | label     | String | Yes      | The label or display name for the node.                |
+| Icon     | icon      | String | No       | Icon representing the node (e.g., Font Awesome class). |
+| Children | children  | Array  | No       | An array of child nodes belonging to the current node. |
 
 Example of data that can be used :
 
