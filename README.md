@@ -6,9 +6,9 @@ The React tree component offers a versatile and customizable solution for displa
 
 ![tree](public/treeComponent.png)
 
-| Name | Type  | Required | Description                                   |
-| ---- | ----- | -------- | --------------------------------------------- |
-| dataSource  | Array | Yes      | The dataSource that contains data to display. |
+| Name       | Type  | Required | Description                                   |
+| ---------- | ----- | -------- | --------------------------------------------- |
+| dataSource | Array | Yes      | The dataSource that contains data to display. |
 
 ### Datasource
 
@@ -17,7 +17,9 @@ The React tree component offers a versatile and customizable solution for displa
 | Key      | key       | String | Yes      | Unique identifier for the node.                        |
 | Label    | label     | String | Yes      | The label or display name for the node.                |
 | Icon     | icon      | String | No       | Icon representing the node (e.g., Font Awesome class). |
-| url      | url       | String | No       | url link if it is a last element                       |
+| Url      | url       | String | No       | url link if it is a last element                       |
+| Webform  | webform   | String | No       | webform loader id                                      |
+| Target   | target    | String | No       | webform name to be displayed in the webform loader     |
 | Children | children  | Array  | No       | An array of child nodes belonging to the current node. |
 
 Example of data that can be used :
@@ -49,7 +51,9 @@ Example of data that can be used :
       {
         "key": "1-2",
         "label": "Subfolder 2",
-        "icon": "fa-solid fa-folder"
+        "icon": "fa-solid fa-folder",
+        "webform": "kS4j2Iu8Mv",
+        "target": "home"
       }
     ]
   },
