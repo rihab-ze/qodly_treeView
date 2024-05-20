@@ -21,6 +21,7 @@ const treeData = [
       { key: '3', icon: 'fa-regular fa-calendar-days', label: 'Node 1.2' },
     ],
   },
+  { key: '4', icon: 'fa-regular fa-folder', label: 'Node 2' },
 ];
 const Tree: FC<ITreeProps> = ({ style, className, classNames = [] }) => {
   const {
@@ -67,11 +68,12 @@ interface TreeNodeProps {
   node: TreeNodeData;
   isLast: boolean;
   onLastItemClick?: (node: TreeNodeData) => void;
+  expand?: boolean;
 }
-function TreeNode({ node, isLast, onLastItemClick }: TreeNodeProps) {
+function TreeNode({ node, isLast, onLastItemClick, expand }: TreeNodeProps) {
   const { children, label, icon } = node;
 
-  const [showChildren, setShowChildren] = useState(false);
+  const [showChildren, setShowChildren] = useState(expand || false);
 
   const handleClick = () => {
     if (isLast) {
@@ -87,12 +89,8 @@ function TreeNode({ node, isLast, onLastItemClick }: TreeNodeProps) {
     <>
       <div onClick={handleClick} style={{ marginBottom: '10px' }}>
         <div className="flex items-center gap-1" style={{ cursor: children ? 'pointer' : '' }}>
-          {showChildren && children ? (
-            <i className="fa-solid fa-angle-down mr-2"></i>
-          ) : children ? (
-            <i className="fa-solid fa-angle-right mr-2"></i>
-          ) : (
-            ''
+          {children && (
+            <i className={`fa-solid ${showChildren ? 'fa-angle-down' : 'fa-angle-right'} mr-2`}></i>
           )}
           {icon && <i className={` ${icon} mr-1`}></i>}
 

@@ -55,7 +55,11 @@ export default {
       accept: ['string'],
     },
   },
-  defaultProps: {},
+  defaultProps: {
+    expand: true,
+  },
 } as T4DComponentConfig<ITreeProps>;
 
-export interface ITreeProps extends webforms.ComponentProps {}
+export interface ITreeProps extends webforms.ComponentProps {
+  expand: boolean;
+}
