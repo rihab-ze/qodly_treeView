@@ -33,34 +33,32 @@ function TreeNode({ node, isLast, onLastItemClick, expand }: TreeNodeProps) {
         payload: { target },
       });
     }
-
-    return (
-      <>
-        <div onClick={handleClick} style={{ marginBottom: '10px' }}>
-          <div className="flex items-center gap-1" style={{ cursor: children ? 'pointer' : '' }}>
-            {children && (
-              <i
-                className={`fa-solid ${showChildren ? 'fa-angle-down' : 'fa-angle-right'} mr-2`}
-              ></i>
-            )}
-            {icon && <i className={`${icon} mr-1`}></i>}
-            {url ? (
-              <a href={url}>{label}</a>
-            ) : (
-              <div className={`${webform && 'cursor-pointer'}  `} onClick={handleChildClick}>
-                {label}
-              </div>
-            )}
-          </div>
-        </div>
-        {showChildren && children && (
-          <ul style={{ paddingLeft: '10px', marginLeft: '27px' }}>
-            <TreeNodeComponent treeData={children} expand={expand} />
-          </ul>
-        )}
-      </>
-    );
   };
+
+  return (
+    <>
+      <div onClick={handleClick} style={{ marginBottom: '10px' }}>
+        <div className="flex items-center gap-1" style={{ cursor: children ? 'pointer' : '' }}>
+          {children && (
+            <i className={`fa-solid ${showChildren ? 'fa-angle-down' : 'fa-angle-right'} mr-2`}></i>
+          )}
+          {icon && <i className={`${icon} mr-1`}></i>}
+          {url ? (
+            <a href={url}>{label}</a>
+          ) : (
+            <div className={`${webform && 'cursor-pointer'}  `} onClick={handleChildClick}>
+              {label}
+            </div>
+          )}
+        </div>
+      </div>
+      {showChildren && children && (
+        <ul style={{ paddingLeft: '10px', marginLeft: '27px' }}>
+          <TreeNodeComponent treeData={children} expand={expand} />
+        </ul>
+      )}
+    </>
+  );
 }
 
 export default TreeNode;
