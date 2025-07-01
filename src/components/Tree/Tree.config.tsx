@@ -1,6 +1,6 @@
 import { EComponentKind, T4DComponentConfig } from '@ws-ui/webform-editor';
 import { Settings } from '@ws-ui/webform-editor';
-import { MdOutlineTextSnippet } from 'react-icons/md';
+import { LuFolderTree } from 'react-icons/lu';
 
 import TreeSettings, { BasicSettings } from './Tree.settings';
 
@@ -20,46 +20,25 @@ export default {
   info: {
     displayName: 'Tree',
     exposed: true,
-    icon: MdOutlineTextSnippet,
+    icon: LuFolderTree,
     events: [
       {
-        label: 'On Click',
-        value: 'onclick',
-      },
-      {
-        label: 'On Blur',
-        value: 'onblur',
-      },
-      {
-        label: 'On Focus',
-        value: 'onfocus',
-      },
-      {
-        label: 'On MouseEnter',
-        value: 'onmouseenter',
-      },
-      {
-        label: 'On MouseLeave',
-        value: 'onmouseleave',
-      },
-      {
-        label: 'On KeyDown',
-        value: 'onkeydown',
-      },
-      {
-        label: 'On KeyUp',
-        value: 'onkeyup',
+        label: 'On Page Click',
+        value: 'onPageClick',
       },
     ],
     datasources: {
-      accept: ['string'],
+      accept: ['array'],
     },
   },
   defaultProps: {
     expand: true,
+    selectedElementColor: '#f0f0f0',
   },
 } as T4DComponentConfig<ITreeProps>;
 
 export interface ITreeProps extends webforms.ComponentProps {
   expand: boolean;
+  currentPage: string;
+  selectedElementColor: string;
 }

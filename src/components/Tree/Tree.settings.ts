@@ -8,8 +8,37 @@ const commonSettings: TSetting[] = [
     type: ESetting.CHECKBOX,
     defaultValue: true,
   },
+  {
+    key: 'selectedElementColor',
+    label: 'Clicked Node',
+    type: ESetting.COLOR_PICKER,
+   defaultValue:'#f0f0f0'
+  },
 ];
 
+const dataAccessSettings: TSetting[] = [
+  {
+    key: 'datasource',
+    label: 'Data Source',
+    type: ESetting.DS_AUTO_SUGGEST,
+  },
+  {
+    key: 'currentElement',
+    label: 'Current Node',
+    type: ESetting.DS_AUTO_SUGGEST,
+  },
+  {
+    key: 'currentPage',
+    label: 'Selected Page',
+    type: ESetting.DS_AUTO_SUGGEST,
+  },
+  {
+    key: 'serverSideRef',
+    label: 'Server Side',
+    type: ESetting.TEXT_FIELD,
+    validateOnEnter: true,
+  },
+];
 const Settings: TSetting[] = [
   {
     key: 'properties',
@@ -17,8 +46,13 @@ const Settings: TSetting[] = [
     type: ESetting.GROUP,
     components: commonSettings,
   },
-
-  ...DEFAULT_SETTINGS,
+  {
+    key: 'dataAccess',
+    label: 'Data Access',
+    type: ESetting.GROUP,
+    components: dataAccessSettings,
+  },
+  ...load(DEFAULT_SETTINGS).filter( 'dataAccess'),
 ];
 
 export const BasicSettings: TSetting[] = [

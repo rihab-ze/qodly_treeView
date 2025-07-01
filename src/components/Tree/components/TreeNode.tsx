@@ -1,43 +1,40 @@
 import TreeNodeData from './TreeNodeData';
 import { useState } from 'react';
-import { webformLoaderSubject, WebformLoaderActions } from '@ws-ui/webform-editor';
 import { TreeNodeComponent } from '.';
 
 interface TreeNodeProps {
   node: TreeNodeData;
-  isLast: boolean;
-  onLastItemClick?: (node: TreeNodeData) => void;
+  handleNodeClick?: (node: TreeNodeData) => void;
   expand?: boolean;
+  selectedNode?: TreeNodeData;
+  selectedElementColor: string;
 }
-function TreeNode({ node, isLast, onLastItemClick, expand }: TreeNodeProps) {
-  const { children, label, icon, url, webform, target } = node;
-
+function TreeNode({
+  node,
+  handleNodeClick,
+  expand,
+  selectedElementColor,
+  selectedNode,
+}: TreeNodeProps) {
+  const { children, label, icon, url, target } = node;
   const [showChildren, setShowChildren] = useState(expand || false);
-
   const handleClick = () => {
-    if (isLast) {
-      setShowChildren(!showChildren);
-      if (onLastItemClick) {
-        onLastItemClick(node);
-      }
-    } else {
-      setShowChildren(!showChildren);
-    }
+    handleNodeClick && handleNodeClick(node);
+    setShowChildren(!showChildren);
   };
-
-  const handleChildClick = () => {
-    if (webform && target) {
-      webformLoaderSubject.next({
-        id: webform,
-        action: WebformLoaderActions.LOAD,
-        payload: { target },
-      });
-    }
-  };
-
   return (
     <>
-      <div onClick={handleClick} style={{ marginBottom: '10px' }}>
+      <div
+        onClick={handleClick}
+        style={{
+          marginBottom: '10px',
+          backgroundColor:
+            selectedNode && selectedNode.key === node.key ? selectedElementColor : 'transparent', // Highlight if selected
+          padding: '5px',
+          borderRadius: '4px',
+          cursor: 'pointer',
+        }}
+      >
         <div className="flex items-center gap-1" style={{ cursor: children ? 'pointer' : '' }}>
           {children && (
             <i className={`fa-solid ${showChildren ? 'fa-angle-down' : 'fa-angle-right'} mr-2`}></i>
@@ -46,15 +43,19 @@ function TreeNode({ node, isLast, onLastItemClick, expand }: TreeNodeProps) {
           {url ? (
             <a href={url}>{label}</a>
           ) : (
-            <div className={`${webform && 'cursor-pointer'}  `} onClick={handleChildClick}>
-              {label}
-            </div>
+            <div className={`${target && 'cursor-pointer'}`}>{label}</div>
           )}
         </div>
       </div>
       {showChildren && children && (
         <ul style={{ paddingLeft: '10px', marginLeft: '27px' }}>
-          <TreeNodeComponent treeData={children} expand={expand} />
+          <TreeNodeComponent
+            treeData={children}
+            expand={expand}
+            handleNodeClick={handleNodeClick}
+            selectedNode={selectedNode}
+            selectedElementColor={selectedElementColor}
+          />
         </ul>
       )}
     </>

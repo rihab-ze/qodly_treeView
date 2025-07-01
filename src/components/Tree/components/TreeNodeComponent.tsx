@@ -2,20 +2,29 @@ import { TreeNode } from './';
 import TreeNodeData from './TreeNodeData';
 interface TreeNodeComponentProps {
   treeData?: TreeNodeData[];
-  onLastItemClick?: (node: TreeNodeData) => void;
+  handleNodeClick?: (node: TreeNodeData) => void;
   expand?: boolean;
+  selectedNode?: TreeNodeData;
+  selectedElementColor: string;
 }
 
-function TreeNodeComponent({ treeData, onLastItemClick, expand }: TreeNodeComponentProps) {
+function TreeNodeComponent({
+  treeData,
+  handleNodeClick,
+  expand,
+  selectedNode,
+  selectedElementColor,
+}: TreeNodeComponentProps) {
   return (
     <ul>
-      {treeData?.map((node, index) => (
+      {treeData?.map((node) => (
         <TreeNode
           node={node}
           key={node.key}
-          isLast={index === treeData.length - 1}
-          onLastItemClick={onLastItemClick}
+          handleNodeClick={handleNodeClick}
           expand={expand}
+          selectedNode={selectedNode}
+          selectedElementColor={selectedElementColor}
         />
       ))}
     </ul>
