@@ -29,7 +29,7 @@ function TreeNode({ node, isLast, onLastItemClick, expand }: TreeNodeProps) {
     if (webform && target) {
       webformLoaderSubject.next({
         id: webform,
-        action: WebformLoaderActions.LOAD,
+        action: WebformLoaderActions.NAVIGATE,
         payload: { target },
       });
     }
