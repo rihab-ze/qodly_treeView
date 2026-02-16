@@ -45,7 +45,7 @@ function TreeNode({ node, isLast, onLastItemClick, expand, activeKey, onActiveNo
     <>
       <div onClick={handleClick} style={{ marginBottom: '10px' }}>
         <div
-          className={`flex items-center gap-1${isActive ? ' active-node' : ''}`}
+          className={`flex items-center gap-1${isActive ? ' active-node' : ''} ${children ? 'parent-content' : ''} `}
           style={{ cursor: children ? 'pointer' : '' }}
         >
           {children && (
@@ -56,7 +56,7 @@ function TreeNode({ node, isLast, onLastItemClick, expand, activeKey, onActiveNo
             <a href={url}>{label}</a>
           ) : (
             <div
-              className={`${webform && 'cursor-pointer'} ${children ? 'parent-content' : ''}`}
+              className={`${webform && 'cursor-pointer'} `}
               onClick={handleChildClick}
             >
               {label}
