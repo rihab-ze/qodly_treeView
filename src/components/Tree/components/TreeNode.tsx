@@ -11,12 +11,22 @@ interface TreeNodeProps {
   activeKey?: string | null;
   onActiveNodeChange?: (key: string) => void;
 }
+function isParentOfActive(node: TreeNodeData, activeKey?: string | null): boolean {
+  if (!node.children || !activeKey) return false;
+  return node.children.some(
+    (child) =>
+      child.key === activeKey ||
+      (child.children && isParentOfActive(child, activeKey))
+  );
+}
+
 function TreeNode({ node, isLast, onLastItemClick, expand, activeKey, onActiveNodeChange }: TreeNodeProps) {
   const { children, label, icon, url, webform, target, key } = node;
 
   const [showChildren, setShowChildren] = useState(expand || false);
 
   const isActive = activeKey === key;
+  const isActiveParent = isParentOfActive(node, activeKey);
 
   const handleClick = () => {
     if (onActiveNodeChange) onActiveNodeChange(key);
@@ -45,7 +55,7 @@ function TreeNode({ node, isLast, onLastItemClick, expand, activeKey, onActiveNo
     <>
       <div onClick={handleClick} style={{ marginBottom: '10px' }}>
         <div
-          className={`flex items-center gap-1${isActive ? ' active-node' : ''} ${children ? 'parent-content' : ''} `}
+          className={`flex items-center gap-1${isActive ? ' active-node' : ''}${isActiveParent ? ' active-parent' : ''} ${children ? 'parent-content' : ''}`}
           style={{ cursor: children ? 'pointer' : '' }}
         >
           {children && (
