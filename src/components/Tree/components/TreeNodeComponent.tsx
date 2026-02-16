@@ -4,9 +4,11 @@ interface TreeNodeComponentProps {
   treeData?: TreeNodeData[];
   onLastItemClick?: (node: TreeNodeData) => void;
   expand?: boolean;
+  activeKey?: string | null;
+  onActiveNodeChange?: (key: string) => void;
 }
 
-function TreeNodeComponent({ treeData, onLastItemClick, expand }: TreeNodeComponentProps) {
+function TreeNodeComponent({ treeData, onLastItemClick, expand, activeKey, onActiveNodeChange }: TreeNodeComponentProps) {
   return (
     <ul>
       {treeData?.map((node, index) => (
@@ -16,6 +18,8 @@ function TreeNodeComponent({ treeData, onLastItemClick, expand }: TreeNodeCompon
           isLast={index === treeData.length - 1}
           onLastItemClick={onLastItemClick}
           expand={expand}
+          activeKey={activeKey}
+          onActiveNodeChange={onActiveNodeChange}
         />
       ))}
     </ul>

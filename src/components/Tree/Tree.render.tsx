@@ -8,6 +8,7 @@ import { ITreeProps } from './Tree.config';
 const Tree: FC<ITreeProps> = ({ expand, style, className, classNames = [] }) => {
   const { connect } = useRenderer();
   const [value, setValue] = useState<TreeNodeData[]>([]);
+  const [activeKey, setActiveKey] = useState<string | null>(null);
   const {
     sources: { datasource: ds },
   } = useSources();
@@ -28,7 +29,12 @@ const Tree: FC<ITreeProps> = ({ expand, style, className, classNames = [] }) => 
 
   return (
     <div ref={connect} style={style} className={cn(className, classNames)}>
-      <TreeNodeComponent treeData={value} expand={expand} />
+      <TreeNodeComponent
+        treeData={value}
+        expand={expand}
+        activeKey={activeKey}
+        onActiveNodeChange={setActiveKey}
+      />
     </div>
   );
 };

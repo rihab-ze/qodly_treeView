@@ -8,13 +8,18 @@ interface TreeNodeProps {
   isLast: boolean;
   onLastItemClick?: (node: TreeNodeData) => void;
   expand?: boolean;
+  activeKey?: string | null;
+  onActiveNodeChange?: (key: string) => void;
 }
-function TreeNode({ node, isLast, onLastItemClick, expand }: TreeNodeProps) {
-  const { children, label, icon, url, webform, target } = node;
+function TreeNode({ node, isLast, onLastItemClick, expand, activeKey, onActiveNodeChange }: TreeNodeProps) {
+  const { children, label, icon, url, webform, target, key } = node;
 
   const [showChildren, setShowChildren] = useState(expand || false);
 
+  const isActive = activeKey === key;
+
   const handleClick = () => {
+    if (onActiveNodeChange) onActiveNodeChange(key);
     if (isLast) {
       setShowChildren(!showChildren);
       if (onLastItemClick) {
@@ -26,6 +31,7 @@ function TreeNode({ node, isLast, onLastItemClick, expand }: TreeNodeProps) {
   };
 
   const handleChildClick = () => {
+    if (onActiveNodeChange) onActiveNodeChange(key);
     if (webform && target) {
       webformLoaderSubject.next({
         id: webform,
@@ -38,7 +44,10 @@ function TreeNode({ node, isLast, onLastItemClick, expand }: TreeNodeProps) {
   return (
     <>
       <div onClick={handleClick} style={{ marginBottom: '10px' }}>
-        <div className="flex items-center gap-1" style={{ cursor: children ? 'pointer' : '' }}>
+        <div
+          className={`flex items-center gap-1${isActive ? ' active-node' : ''}`}
+          style={{ cursor: children ? 'pointer' : '' }}
+        >
           {children && (
             <i className={`fa-solid ${showChildren ? 'fa-angle-down' : 'fa-angle-right'} mr-2`}></i>
           )}
@@ -46,7 +55,10 @@ function TreeNode({ node, isLast, onLastItemClick, expand }: TreeNodeProps) {
           {url ? (
             <a href={url}>{label}</a>
           ) : (
-            <div className={`${webform && 'cursor-pointer'}  `} onClick={handleChildClick}>
+            <div
+              className={`${webform && 'cursor-pointer'} ${children ? 'parent-content' : ''}`}
+              onClick={handleChildClick}
+            >
               {label}
             </div>
           )}
@@ -54,7 +66,12 @@ function TreeNode({ node, isLast, onLastItemClick, expand }: TreeNodeProps) {
       </div>
       {showChildren && children && (
         <ul style={{ paddingLeft: '10px', marginLeft: '27px' }}>
-          <TreeNodeComponent treeData={children} expand={expand} />
+          <TreeNodeComponent
+            treeData={children}
+            expand={expand}
+            activeKey={activeKey}
+            onActiveNodeChange={onActiveNodeChange}
+          />
         </ul>
       )}
     </>
